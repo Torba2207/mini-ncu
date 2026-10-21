@@ -1,6 +1,6 @@
 #pragma once
 #include "card.hpp"
-
+#include <format>
 namespace ncu{
     class Transponder: public Card {
         
@@ -9,13 +9,13 @@ namespace ncu{
             :Card(slotId, {Port{.name="1-"+std::to_string(slotId)+"-C1"}, 
             Port{.name="1-"+std::to_string(slotId)+"-N1"}}) {}
             std::string_view getType() const override {
-                return "Transponder";
+                return "transponder";
             }
             std::string getDescription() const override {
                 return "Transponder card in slot " 
                 + std::to_string(getSlotId())
                 +" with " + std::to_string(getPorts().size()) 
-                + " ports. Temperature: " + std::to_string(getTemperature()) + "°C";
+                + " ports. Temperature: " + std::format("{:.1f}",getTemperature()) + "°C";
             }
     };
 }
