@@ -27,6 +27,7 @@ namespace ncu{
             }
 
             Card* getCardBySlot(std::size_t slot) {
+                if(slot<1||slot>kSlots) return nullptr;
                 return cards_[slot-1].get();
             }
 
