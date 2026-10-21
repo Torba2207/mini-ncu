@@ -5,7 +5,7 @@
 #include <algorithm>
 namespace ncu{
     enum class ShelfActionResult{
-        Ok, InvalidSlot, NullCard, SlotOcupied, NoCardInSlot
+        Ok, InvalidSlot, NullCard, SlotOccupied, NoCardInSlot
     };
     class Shelf{
         public:
@@ -17,7 +17,7 @@ namespace ncu{
             ShelfActionResult insert(std::size_t slot, std::unique_ptr<Card> card){
                 if(slot<1 || slot>kSlots) return ShelfActionResult::InvalidSlot;
                 if(!card)return ShelfActionResult::NullCard;
-                if(cards_[slot-1]) return ShelfActionResult::SlotOcupied;
+                if(cards_[slot-1]) return ShelfActionResult::SlotOccupied;
                 cards_[slot-1] = std::move(card);
                 return ShelfActionResult::Ok;
             }
