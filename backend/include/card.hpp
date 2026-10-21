@@ -16,7 +16,7 @@ namespace ncu{
         Card(std::size_t slotId, std::vector<Port> ports):slotId_(slotId), temperature_(25.0),ports_(std::move(ports)){}
     public:
         virtual std::string_view getType() const=0;
-        virtual std::string_view getDescription() const=0;
+        virtual std::string getDescription() const=0;
         virtual ~Card()=default;
         std::span<const Port> getPorts() const {
             return ports_;
