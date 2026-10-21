@@ -1,10 +1,15 @@
-#include "port.hpp"
-#include "card.hpp"
 #include "transponder.hpp"
-#include <cstdio>
+#include "amplifier.hpp"
+#include <iostream>
+#include <memory>
 
 int main (){
-    ncu::Transponder transponder(1);
-    printf("%s\n", transponder.getDescription().c_str());
+    std::vector<std::unique_ptr<ncu::Card>> cards;
+    cards.push_back(std::make_unique<ncu::Transponder>(1));
+    cards.push_back(std::make_unique<ncu::Amplifier>(2, 20.0));
+    
+    for (const auto& card : cards){
+        std::cout<<card->getDescription()<<"\n";
+    }
     return 0;
 }
