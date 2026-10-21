@@ -2,14 +2,14 @@
 #include "amplifier.hpp"
 #include <iostream>
 #include <memory>
+#include "shelf.hpp"
 
 int main (){
-    std::vector<std::unique_ptr<ncu::Card>> cards;
-    cards.push_back(std::make_unique<ncu::Transponder>(1));
-    cards.push_back(std::make_unique<ncu::Amplifier>(2, 20.0));
-    
-    for (const auto& card : cards){
-        std::cout<<card->getDescription()<<"\n";
-    }
+    ncu::Shelf shelf;
+    shelf.insert(1, std::make_unique<ncu::Transponder>(1));
+    shelf.insert(2, std::make_unique<ncu::Amplifier>(2));
+    shelf.insert(2, std::make_unique<ncu::Transponder>(2));
+    std::cout<<shelf.getCardBySlot(1)->getDescription()<<"\n";
+    std::cout<<shelf.getCardBySlot(2)->getDescription()<<"\n";
     return 0;
 }
