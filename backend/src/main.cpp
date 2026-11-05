@@ -1,22 +1,18 @@
 #include "transponder.hpp"
 #include "amplifier.hpp"
-#include <iostream>
 #include <memory>
 #include "shelf.hpp"
+
+
 
 int main (){
     ncu::Shelf shelf;
     shelf.insert(1, std::make_unique<ncu::Transponder>(1));
     shelf.insert(2, std::make_unique<ncu::Amplifier>(2));
-    shelf.insert(2, std::make_unique<ncu::Transponder>(2));
-    for(std::size_t i=1; i<=shelf.kSlots;i++){
-        if(const ncu::Card* card = std::as_const(shelf).getCardBySlot(i)){
-            std::cout<< card->getDescription()<<"\n";
-        }
-        else{
-            std::cout<<"Slot "+std::to_string(i)+" is empty"<<"\n";
-        }
-        
-    }
+    shelf.insert(3, std::make_unique<ncu::Transponder>(3));
+    shelf.printShelf();
+    std::unique_ptr<ncu::Card> amplifier = shelf.remove(2);
+    shelf.insert(4,std::move(amplifier));
+    shelf.printShelf();
     return 0;
 }

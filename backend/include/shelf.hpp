@@ -3,9 +3,10 @@
 #include <array>
 #include <memory>
 #include <algorithm>
+#include <iostream>
 namespace ncu{
-    enum class ShelfActionResult{
-        Ok, InvalidSlot, NullCard, SlotOccupied, NoCardInSlot
+    enum class [[nodiscard]] ShelfActionResult {
+        Ok, InvalidSlot, NullCard, SlotOccupied
     };
     class Shelf{
         public:
@@ -19,6 +20,7 @@ namespace ncu{
                 if(!card)return ShelfActionResult::NullCard;
                 if(cards_[slot-1]) return ShelfActionResult::SlotOccupied;
                 cards_[slot-1] = std::move(card);
+                cards_[slot-1]->setSlotId(slot);
                 return ShelfActionResult::Ok;
             }
             std::unique_ptr<Card> remove(std::size_t slot){
@@ -52,6 +54,18 @@ namespace ncu{
                     }
                 }
                 return nullptr;
+            }
+
+            void printShelf() const{
+                for(std::size_t i=1; i<=kSlots;i++){
+                    if(const ncu::Card* card = getCardBySlot(i)){
+                        std::cout<< card->getDescription()<<"\n";
+                    }
+                    else{
+                        std::cout<<"Slot "+std::to_string(i)+" is empty"<<"\n";
+                    }
+                    
+                }
             }
 
             
