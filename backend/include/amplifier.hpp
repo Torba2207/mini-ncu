@@ -19,7 +19,7 @@ namespace ncu{
                 return "Amplifier card in slot " 
                 + std::to_string(getSlotId())
                 +" with " + std::to_string(getPorts().size()) 
-                + " ports. Temperature: " + std::format("{:.1f}",getTemperature()) + "°C"
+                + " port(s). Temperature: " + std::format("{:.1f}",getTemperature()) + "°C"
                 + " and amplification " + std::format("{:.1f}",getGainDb()) +" dB";
             }
 
