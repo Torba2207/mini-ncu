@@ -14,6 +14,10 @@ namespace ncu{
         std::vector<Port> ports_;
     protected:
         Card(std::size_t slotId, std::vector<Port> ports):slotId_(slotId), temperature_(25.0),ports_(std::move(ports)){}
+        Card(const Card&)=default;
+        Card& operator=(const Card&)=default;
+        Card(Card&&)=default;
+        Card& operator=(Card&&)=default;
     public:
         virtual std::string_view getType() const=0;
         virtual std::string getDescription() const=0;
@@ -29,6 +33,9 @@ namespace ncu{
         }
         double getTemperature() const {
             return temperature_;
+        }
+        void setSlotId(size_t newSlotId){
+            slotId_=newSlotId;
         }     
     };
 }
